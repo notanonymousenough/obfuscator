@@ -26,7 +26,7 @@ Private исходные backup на каждом узле `/var/lib/obfuscator-
 - FakeTLS HMAC-аутентификация owner через публичный mtp443 и оба backend отдельно — passed. Это проверка secret/TLS, **не** отправка Telegram-сообщений через Telegram DC.
 - Отключение DE1 backend в HAProxy -> авторизация через AZ1; отключение AZ1 -> через DE1; оба backend восстановлены — passed. Обычные TCP health checks с fall3/rise2, не end-to-end Telegram health.
 - Тестовый клиент отозван: VPN и Telegram landing404, старый MTProto secret отвергается обоими backend, старый VLESS UUID не пропускает HTTPS через DE1/AZ1 — passed.
-- TLS сертификаты новых имён действуют до26.01.2027. DE1 Certbot dry-run нового portal cert — passed. Результат AZ1 dry-run записывается после проверки ниже.
+- TLS сертификаты новых имён действуют до26.01.2027. Certbot dry-run новых сертификатов DE1 portal и AZ1 VPN/mtp — оба passed.
 - Certbot timer enabled: DE1 00:20/12:20UTC, AZ1 03:20/15:20UTC, jitter10мин; nginx reload deploy hook сохранён.
 - Проверки из РФ, импорт конкретной версии Happ на телефоне, сообщения/медиа Telegram и UDP/звонки через VPN **ещё не выполнены**.
 
