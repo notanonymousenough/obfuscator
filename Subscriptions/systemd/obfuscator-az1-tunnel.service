@@ -1,0 +1,21 @@
+[Unit]
+Description=Persistent AZ1 reverse SSH tunnel to DE1
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+[Service]
+User=mtptunnel
+Group=mtptunnel
+ExecStart=/usr/bin/ssh -F /dev/null -NT -p 2222 -i /etc/obfuscator-tunnel/id_ed25519 -o BatchMode=yes -o IdentitiesOnly=yes -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/etc/obfuscator-tunnel/known_hosts -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -R 127.0.0.1:9443:127.0.0.1:443 -R 127.0.0.1:12222:127.0.0.1:2222 -R 127.0.0.1:9444:127.0.0.1:8444 -R 127.0.0.1:9446:127.0.0.1:8446 obfuscator-relay@159.89.12.205
+Restart=always
+RestartSec=5
+TimeoutStopSec=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0077
+[Install]
+WantedBy=multi-user.target

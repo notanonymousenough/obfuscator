@@ -1,0 +1,19 @@
+[Unit]
+Description=Obfuscator AZ1 VLESS XHTTP
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+[Service]
+User=obfvpn
+Group=obfvpn
+ExecStart=/usr/local/bin/xray run -c /etc/obfuscator-vpn/config.json
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+[Install]
+WantedBy=multi-user.target

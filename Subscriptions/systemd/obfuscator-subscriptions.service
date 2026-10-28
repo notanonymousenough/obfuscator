@@ -1,0 +1,16 @@
+[Unit]
+Description=Obfuscator private subscriptions
+After=network.target
+[Service]
+User=obfsub
+Group=obfsub
+ExecStart=/usr/bin/python3 /usr/local/lib/obfuscator-subscriptions/server.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+[Install]
+WantedBy=multi-user.target

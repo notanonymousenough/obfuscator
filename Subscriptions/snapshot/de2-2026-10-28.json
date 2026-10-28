@@ -1,0 +1,76 @@
+{
+  "observed_utc": "2026-10-28T09:58:51.483879+00:00",
+  "hostname": "obfuscator-de2",
+  "services": {
+    "x-ui": {
+      "active": "inactive",
+      "enabled": "disabled"
+    },
+    "xray-docker": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "nginx": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "haproxy": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-subscriptions": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-telemt": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-mtp": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-vpn": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-az1-tunnel": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-vpn-ddns.timer": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "certbot.timer": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "legacy": {
+    "xui": 3,
+    "vpn": 1,
+    "mtp": 0
+  },
+  "xui_inbounds": [
+    {
+      "protocol": "vless",
+      "port": 443,
+      "enabled": false,
+      "client_entries": 1
+    }
+  ],
+  "managed_clients": 1,
+  "listener_ports": [
+    "LISTEN 0      4096       127.0.0.1:8443 0.0.0.0:*",
+    "LISTEN 0      511          0.0.0.0:443  0.0.0.0:*",
+    "LISTEN 0      4096      127.0.0.54:53   0.0.0.0:*",
+    "LISTEN 0      511          0.0.0.0:80   0.0.0.0:*",
+    "LISTEN 0      4096         0.0.0.0:2222 0.0.0.0:*",
+    "LISTEN 0      4096   127.0.0.53%lo:53   0.0.0.0:*",
+    "LISTEN 0      511             [::]:443     [::]:*",
+    "LISTEN 0      511             [::]:80      [::]:*",
+    "LISTEN 0      4096            [::]:2222    [::]:*"
+  ]
+}
+

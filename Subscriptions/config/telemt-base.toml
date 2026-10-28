@@ -1,0 +1,25 @@
+[general]
+use_middle_proxy = false
+log_level = "silent"
+[general.modes]
+classic = false
+secure = false
+tls = true
+[general.links]
+show = []
+public_host = "mtp.funsociety.dev"
+public_port = 443
+[server]
+port = 8446
+max_connections = 1024
+[server.api]
+enabled = false
+[[server.listeners]]
+ip = "127.0.0.1"
+[censorship]
+tls_domain = "mtp.funsociety.dev"
+mask = true
+mask_host = "127.0.0.1"
+mask_port = __MASK_PORT__
+tls_emulation = true
+tls_front_dir = "/var/lib/obfuscator-telemt/tlsfront"

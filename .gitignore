@@ -10,3 +10,5 @@ MTP/dist/*.part
 **/.env
 **/*.key
 **/*.private.*
+# Release binaries are fetched with pinned SHA256 rather than committed here.
+Subscriptions/assets/

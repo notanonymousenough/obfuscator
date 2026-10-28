@@ -1,0 +1,9 @@
+[Unit]
+Description=Re-evaluate AZ1 direct ingress every two minutes
+[Timer]
+OnBootSec=90s
+OnUnitActiveSec=2min
+RandomizedDelaySec=15s
+Persistent=true
+[Install]
+WantedBy=timers.target

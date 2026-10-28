@@ -1,0 +1,105 @@
+{
+  "observed_utc": "2026-10-28T09:59:53.330695+00:00",
+  "hostname": "obfuscator-de1",
+  "services": {
+    "x-ui": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "xray-docker": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "nginx": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "haproxy": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "obfuscator-subscriptions": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "obfuscator-telemt": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "obfuscator-mtp": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-vpn": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-az1-tunnel": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "obfuscator-vpn-ddns.timer": {
+      "active": "inactive",
+      "enabled": "not-found"
+    },
+    "certbot.timer": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "legacy": {
+    "xui": 21,
+    "vpn": 1,
+    "mtp": 0
+  },
+  "xui_inbounds": [
+    {
+      "protocol": "vless",
+      "port": 4443,
+      "enabled": false,
+      "client_entries": 5
+    },
+    {
+      "protocol": "vless",
+      "port": 8443,
+      "enabled": false,
+      "client_entries": 5
+    },
+    {
+      "protocol": "mtproto",
+      "port": 8888,
+      "enabled": true,
+      "client_entries": 7
+    },
+    {
+      "protocol": "vless",
+      "port": 443,
+      "enabled": false,
+      "client_entries": 1
+    }
+  ],
+  "managed_clients": 1,
+  "listener_ports": [
+    "LISTEN 0      4096       127.0.0.1:1337  0.0.0.0:*",
+    "LISTEN 0      5          127.0.0.1:9080  0.0.0.0:*",
+    "LISTEN 0      128        127.0.0.1:12222 0.0.0.0:*",
+    "LISTEN 0      4096         0.0.0.0:443   0.0.0.0:*",
+    "LISTEN 0      4096      127.0.0.54:53    0.0.0.0:*",
+    "LISTEN 0      511          0.0.0.0:80    0.0.0.0:*",
+    "LISTEN 0      4096       127.0.0.1:33347 0.0.0.0:*",
+    "LISTEN 0      4096         0.0.0.0:2222  0.0.0.0:*",
+    "LISTEN 0      128        127.0.0.1:9443  0.0.0.0:*",
+    "LISTEN 0      128        127.0.0.1:9446  0.0.0.0:*",
+    "LISTEN 0      128        127.0.0.1:9444  0.0.0.0:*",
+    "LISTEN 0      1024       127.0.0.1:8446  0.0.0.0:*",
+    "LISTEN 0      4096       127.0.0.1:8445  0.0.0.0:*",
+    "LISTEN 0      511        127.0.0.1:8444  0.0.0.0:*",
+    "LISTEN 0      4096   127.0.0.53%lo:53    0.0.0.0:*",
+    "LISTEN 0      4096       127.0.0.1:35035 0.0.0.0:*",
+    "LISTEN 0      4096               *:2096        *:*",
+    "LISTEN 0      511             [::]:80       [::]:*",
+    "LISTEN 0      4096               *:8888        *:*",
+    "LISTEN 0      4096            [::]:2222     [::]:*"
+  ]
+}
+

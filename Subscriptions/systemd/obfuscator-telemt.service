@@ -1,0 +1,21 @@
+[Unit]
+Description=Obfuscator multi-secret MTProto (Telemt)
+After=network-online.target nginx.service
+Wants=network-online.target
+StartLimitIntervalSec=0
+[Service]
+User=obftelemt
+Group=obftelemt
+StateDirectory=obfuscator-telemt
+WorkingDirectory=/var/lib/obfuscator-telemt
+ExecStart=/usr/local/bin/telemt /etc/obfuscator-telemt/config.toml
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/obfuscator-telemt
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Cloudflare AZ1 VPN DDNS with external reachability validation
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/lib/obfuscator-subscriptions/ddns-az1.py
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+PrivateTmp=yes
+UMask=0077
