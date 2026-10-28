@@ -10,7 +10,7 @@ def main():
   key=pathlib.Path(cfg['publisher_token_file']).read_text().strip()
   req=urllib.request.Request('https://obfuscator.funsociety.dev/internal/az1-reachability',data=json.dumps({'ipv4':ip}).encode(),headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
   with urllib.request.urlopen(req,timeout=15) as r:reachable=json.load(r)['reachable'] is True
- except Exception:print('External probe unavailable; selecting DE1 relay')
+ except Exception:raise RuntimeError('External probe unavailable; DNS left unchanged') from None
  selected=ip if reachable else cfg['relay_ipv4']
  for name in NAMES:
   sync({'zone':'funsociety.dev','name':name,'token_file':'/etc/obfuscator/cloudflare.token','ipv4':selected,'ingress_confirmed':True},True)

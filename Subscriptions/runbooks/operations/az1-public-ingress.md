@@ -24,7 +24,7 @@
 2. Убедиться, что DHCP reservation и forward80/443 сохранились. RPi `haproxy` слушает0.0.0.0:443, UFW разрешает443.
 3. Получить новый внешний IP с RPi (`curl -4 https://api.ipify.org`). С DE2 проверить `curl --resolve vpn-az1.obfuscator.funsociety.dev:443:PUBLIC_IP https://vpn-az1.obfuscator.funsociety.dev/.well-known/obfuscator-node` — нужен валидный TLS и тело `obfuscator-az1`.
 4. На AZ1 root: `systemctl start obfuscator-vpn-ddns`, `journalctl -u obfuscator-vpn-ddns -n 12`. Только после успешной внешней TLS identity-проверки DDNS выберет direct.
-5. Единый DDNS обновляет **оба** A DNS-only имени: `az1.obfuscator.funsociety.dev` и `vpn-az1.obfuscator.funsociety.dev`. Старый static `obfuscator-ddns.timer` отключён, чтобы не перезаписать direct адрес DE1-адресом. При провале проверки оба имени возвращаются на relay.
+5. Единый DDNS обновляет **оба** A DNS-only имени: `az1.obfuscator.funsociety.dev` и `vpn-az1.obfuscator.funsociety.dev`. Старый static `obfuscator-ddns.timer` отключён, чтобы не перезаписать direct адрес DE1-адресом. При подтверждённой внешним probe недоступности оба имени возвращаются на relay. Если недоступен сам probe API на DE1, DNS остаётся прежним: сбой DE1 не должен увести исправный direct AZ1 на сломанный relay.
 6. Reverse SSH оставляется включённым. SSH извне по-прежнему доступен через сохранённый DE1 reverse12222; проброса внешнего2222 на Tenda нет. MTProto secret/клиентские UUID при смене IP не меняются.
 7. Обновить подписку/переподключить Happ, повторить HTTPS/UDP тест и тест из РФ. Учитывать DNS TTL120 и кеш телефона.
 
