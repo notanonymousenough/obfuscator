@@ -1,5 +1,6 @@
 # Публичный вход AZ1 через DE1
 
+> Обновление28.10.2026: текущий unified DDNS управляет обоими AZ1 hostname и заменяет описанный ниже старый static timer. Прямой IPv4 сейчас блокирует CGNAT провайдера; [диагностика и ввод прямого входа](../Subscriptions/runbooks/operations/az1-public-ingress.md).
 Выбран владельцем 27.10.2026 из-за CGNAT в Азербайджане.
 
 ```text

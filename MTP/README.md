@@ -1,5 +1,6 @@
 # MTP: самостоятельный MTProto-сервис AZ1
 
+> Обновление28.10.2026: текущий unified DDNS управляет обоими AZ1 hostname и заменяет описанный ниже старый static timer. Прямой IPv4 сейчас блокирует CGNAT провайдера; [диагностика и ввод прямого входа](../Subscriptions/runbooks/operations/az1-public-ingress.md).
 Цель: Raspberry Pi без x-ui, с `mtg` FakeTLS на TCP 443, SSH 2222, systemd, настоящим TLS fallback, автоматическим продлением сертификата и подготовленным DDNS.
 
 ## Состояние и границы

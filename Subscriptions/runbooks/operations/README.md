@@ -33,7 +33,7 @@ certbot renew --dry-run
 
 ## DDNS / CGNAT
 
-AZ1 root: `systemctl start obfuscator-vpn-ddns; journalctl -u obfuscator-vpn-ddns -n 15`. `direct` — DE1 проверил публичный IP443, TLS и идентификатор AZ1. `relay` — DNS ведёт через DE1. Проброс портов и MAC reservation не снимают CGNAT. TTL120, у клиентов возможны дополнительные кеши. Старый az1 hostname сохраняется на DE1.
+AZ1 root: `systemctl start obfuscator-vpn-ddns; journalctl -u obfuscator-vpn-ddns -n 15`. `direct` — DE1 проверил публичный IP443, TLS и идентификатор AZ1. `relay` — DNS ведёт через DE1. Проброс портов и MAC reservation не снимают CGNAT. TTL120, у клиентов возможны дополнительные кеши. Оба AZ1 hostname выбирают direct/relay одним DDNS; старый static timer отключён.
 
 ## Статус / сертификат
 
@@ -64,3 +64,5 @@ AZ1 ingress rollback: stop haproxy, вернуть `/etc/obfuscator/mtg.toml.pre
 `python3 Subscriptions/scripts/verify-delivery.py` — owner subscription/redirect/скрытый DE2. `verify-vpn.py` — реальный HTTPS через три выданных owner узла из AZ1. `verify-mtp.py` и `verify-mtp.py --via az1`/`--via de1` — FakeTLS HMAC-аутентификация. Это не проверка Telegram DC/сообщений. Для отозванного verification: `verify-delivery.py verification --revoked`, `verify-mtp.py verification --via az1 --rejected`, `verify-vpn.py verification --rejected`.
 
 `verify-pool.sh` запускать через root-tmux на DE1: временно исключает по одному backend, проверяет HMAC и в finally возвращает оба. Проводить в согласованное окно — новые подключения кратковременно идут только через оставшийся backend.
+
+[Прямой вход AZ1:443, CGNAT и что запросить у провайдера](az1-public-ingress.md).

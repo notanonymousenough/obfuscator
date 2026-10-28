@@ -52,7 +52,7 @@ flowchart LR
  O[Оператор] -. отдельный URI .-> D2[DE2 XHTTP]
 ```
 
-AZ1 VPN hostname — `vpn-az1.obfuscator.funsociety.dev`: DDNS выбирает реальный IP RPi после внешней TLS-проверки с DE1. Если проброс портов не проходит/CGNAT, DNS указывает на DE1, который ведёт XHTTP через reverse tunnel. Старый `az1.obfuscator.funsociety.dev` остаётся за релеем, чтобы не менять старый MTProto-секрет и поведение клиентов. `mtp` и подписка пока зависят от DE1: это резерв backend, не отказоустойчивость публичного IP.
+AZ1 VPN hostname — `vpn-az1.obfuscator.funsociety.dev`: DDNS выбирает реальный IP RPi после внешней TLS-проверки с DE1. Если проброс портов не проходит/CGNAT, DNS указывает на DE1, который ведёт XHTTP через reverse tunnel. Единый DDNS обновляет также `az1.obfuscator.funsociety.dev`; старый MTProto-секрет сохраняется, а SNI попадает на прежний mtg за HAProxy. Оба имени выбирают direct только после внешней проверки, иначе relay. `mtp` и подписка пока зависят от DE1: это резерв backend, не отказоустойчивость публичного IP.
 
 TCP health check HAProxy (5 секунд, fall 3/rise 2) проверяет доступность listener, а не аутентификацию в Telegram. Обрыв активного TCP не переносится между backend бесшовно; клиент переподключается. Проверка из РФ остаётся отдельной приёмкой. MTProto не заменяет VPN для звонков: для голосовых/видеозвонков использовать VPN/TUN с UDP, проверять на телефоне.
 
@@ -70,3 +70,5 @@ TCP health check HAProxy (5 секунд, fall 3/rise 2) проверяет до
 Официальные форматы: [Happ: subscription](https://github.com/HappDev/happ_su/blob/main/faq/adding-configuration-subscription.md), [Telemt 3.5.14 configuration](https://github.com/telemt/telemt/blob/3.5.14/docs/Config_params/CONFIG_PARAMS.en.md), [Xray XHTTP](https://github.com/XTLS/Xray-core/discussions/4113).
 
 [Фактическое развёртывание и результаты проверок](DEPLOYMENT.md).
+
+[Прямой вход AZ1: диагностика CGNAT и подключение публичного IP](runbooks/operations/az1-public-ingress.md).
