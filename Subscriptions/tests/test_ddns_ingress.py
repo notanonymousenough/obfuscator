@@ -20,3 +20,9 @@ class DDNSIngress(unittest.TestCase):
  def test_reachable_publishes_both_direct_names(self):self.run_case(True)
  def test_unreachable_keeps_both_relay_names(self):self.run_case(False)
  def test_probe_error_preserves_current_dns(self):self.run_case(True,True)
+
+ def test_forced_relay_skips_discovery_and_external_probe(self):
+  with tempfile.TemporaryDirectory() as td:
+   cfg=pathlib.Path(td)/'config';cfg.write_text(json.dumps({'ingress_mode':'relay','relay_ipv4':'159.89.12.205'}))
+   with patch.object(m,'CONFIG',cfg),patch.object(m,'public_ipv4') as discover,patch.object(m.urllib.request,'urlopen') as probe,patch.object(m,'sync') as sync,contextlib.redirect_stdout(io.StringIO()):m.main()
+   discover.assert_not_called();probe.assert_not_called();self.assertEqual(sync.call_count,2)

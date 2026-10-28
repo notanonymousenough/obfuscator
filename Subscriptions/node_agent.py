@@ -115,7 +115,9 @@ def main():
  if action=='configure-ddns' and node=='az1':
   token=data['publisher_token'];assert re.fullmatch(r'[A-Za-z0-9_-]{43}',token)
   atomic('/etc/obfuscator/az1-publisher.token',token+'\n',0o600)
-  atomic('/etc/obfuscator/az1-ddns.json',json.dumps({'publisher_token_file':'/etc/obfuscator/az1-publisher.token','relay_ipv4':'159.89.12.205'})+'\n',0o600)
+  config=pathlib.Path('/etc/obfuscator/az1-ddns.json');cfg=json.loads(config.read_text()) if config.exists() else {}
+  cfg.update({'publisher_token_file':'/etc/obfuscator/az1-publisher.token','relay_ipv4':'159.89.12.205'});cfg.setdefault('ingress_mode','relay')
+  atomic(config,json.dumps(cfg)+'\n',0o600)
   return {'configured':True}
  if action=='portal' and node=='de1':
   body=data['data'];assert isinstance(body['clients'],dict)

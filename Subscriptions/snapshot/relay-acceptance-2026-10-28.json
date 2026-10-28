@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-28",
+  "change": "Guard SNI cache assignment and wait for SNI before selecting a TCP backend",
+  "timeout_seconds": 7,
+  "sources": {
+    "Baku/AZ1": {
+      "checks": 80,
+      "failures": 0,
+      "max_seconds": 6.404166,
+      "median_seconds": 1.0105685000000002
+    },
+    "DE2": {
+      "checks": 20,
+      "failures": 0,
+      "max_seconds": 1.803102,
+      "median_seconds": 0.6577965
+    }
+  },
+  "phone_happ_confirmation": "pending"
+}

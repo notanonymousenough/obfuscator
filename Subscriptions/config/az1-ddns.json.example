@@ -1,4 +1,5 @@
 {
  "publisher_token_file": "/etc/obfuscator/az1-publisher.token",
+ "ingress_mode": "relay",
  "relay_ipv4": "159.89.12.205"
 }

@@ -66,3 +66,9 @@ AZ1 ingress rollback: stop haproxy, вернуть `/etc/obfuscator/mtg.toml.pre
 `verify-pool.sh` запускать через root-tmux на DE1: временно исключает по одному backend, проверяет HMAC и в finally возвращает оба. Проводить в согласованное окно — новые подключения кратковременно идут только через оставшийся backend.
 
 [Прямой вход AZ1:443, CGNAT и что запросить у провайдера](az1-public-ingress.md).
+
+## Повторная проверка таймаутов релея
+
+`python3 Subscriptions/scripts/verify-vpn.py --nodes az1 --attempts 40 --timeout 7` —40 новых TLS/H2 сессий из Баку/AZ1, две независимые HTTPS204 цели. `--from-node de2` — независимый источник. В HAProxy на обоих слоях сохранять условие полного SNI перед `set-var(sess.route_sni)`; без него можно получить неправильный default backend/сертификат. При обновлении не заменять условную запись SNI без полного теста.
+
+AZ1 пока закреплён за DE1: `/etc/obfuscator/az1-ddns.json` содержит `ingress_mode=relay`. `auto` включать только явным решением после появления прямого входа; оба hostname обновляются одним timer.
