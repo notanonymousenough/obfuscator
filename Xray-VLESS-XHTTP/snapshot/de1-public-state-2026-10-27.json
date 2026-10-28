@@ -1,0 +1,27 @@
+{
+  "host": "de1.obfuscator.funsociety.dev",
+  "public_ipv4": "159.89.12.205",
+  "ingress": {
+    "443": "HAProxy TCP SNI",
+    "az1.obfuscator.funsociety.dev": "127.0.0.1:9443 -> AZ1:443",
+    "de1.obfuscator.funsociety.dev": "nginx 127.0.0.1:8444 -> Xray 127.0.0.1:8445"
+  },
+  "xray": {
+    "protocol": "vless",
+    "network": "xhttp",
+    "mode": "stream-up",
+    "image": "ghcr.io/xtls/xray-core@sha256:592ec4d11f656db95598d01e76dbcc6e002d67360b96a5436500a938230f52c7",
+    "version": "26.3.27 Custom",
+    "clients": 1,
+    "private_config": "/etc/obfuscator-xhttp/"
+  },
+  "preserved_mtproto_port": 8888,
+  "verified": {
+    "external_both_sni_tls": true,
+    "authenticated_vless_request": true,
+    "vless_egress_ipv4": "159.89.12.205",
+    "az1_reverse_tunnel_recovery": true,
+    "az1_ssh_via_de1": true,
+    "de1_certificate_renewal_dry_run": true
+  }
+}

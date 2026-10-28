@@ -1,0 +1,14 @@
+[Unit]
+Description=TCP relay DE1:443 to AZ1 reverse tunnel
+Requires=obfuscator-az1-relay.socket
+After=obfuscator-az1-relay.socket
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:9443
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+Restart=on-failure
+RestartSec=2

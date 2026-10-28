@@ -1,0 +1,12 @@
+.cloudflare
+backup.routercfm.cfg
+.DS_Store
+**/secrets/
+**/*.private.*
+**/__pycache__/
+*.pyc
+MTP/dist/*.part
+.secrets/
+**/.env
+**/*.key
+**/*.private.*

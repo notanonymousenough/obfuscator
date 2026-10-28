@@ -1,0 +1,23 @@
+# Rendered on installation; the secret is retained across reinstalls/reboots.
+secret = "__GENERATED_EE_SECRET__"
+bind-to = "0.0.0.0:443"
+concurrency = 1024
+prefer-ip = "only-ipv4"
+tolerate-time-skewness = "5s"
+[domain-fronting]
+ip = "127.0.0.1"
+port = 8443
+[network]
+# System DNS: tested reachable on AZ1; public DoH TLS handshakes timed out.
+dns = ""
+# Future: proxies = ["socks5://127.0.0.1:1080"] with Xray XHTTP client.
+proxies = []
+[network.timeout]
+tcp = "10s"
+http = "15s"
+idle = "5m"
+handshake = "10s"
+[defense.anti-replay]
+enabled = true
+[defense.blocklist]
+enabled = false

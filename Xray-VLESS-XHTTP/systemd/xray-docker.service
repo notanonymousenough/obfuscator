@@ -1,0 +1,12 @@
+[Unit]
+Description=Xray (via docker compose)
+After=docker.service network-online.target
+Requires=docker.service
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/xray
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose down
+[Install]
+WantedBy=multi-user.target

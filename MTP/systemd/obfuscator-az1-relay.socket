@@ -1,0 +1,7 @@
+[Unit]
+Description=Public MTProto ingress for AZ1
+[Socket]
+ListenStream=0.0.0.0:443
+NoDelay=true
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,7 @@
+{
+  "zone": "funsociety.dev",
+  "name": "az1.obfuscator.funsociety.dev",
+  "token_file": "/etc/obfuscator/cloudflare.token",
+  "ipv4": "159.89.12.205",
+  "ingress_confirmed": true
+}
