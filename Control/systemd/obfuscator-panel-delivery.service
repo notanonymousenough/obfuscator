@@ -1,0 +1,18 @@
+[Unit]
+Description=Publish subscription registry from unified panel
+After=x-ui.service obfuscator-subscriptions.service
+Requires=x-ui.service
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/lib/obfuscator-control/delivery.py
+Restart=on-failure
+RestartSec=3
+User=root
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/obfuscator-subscriptions
+UMask=0077
+[Install]
+WantedBy=multi-user.target

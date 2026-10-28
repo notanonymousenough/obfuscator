@@ -111,7 +111,30 @@ def main():
  node=NODE.get(os.uname().nodename.split('.')[0]);assert node
  data=json.loads(sys.stdin.read(2_000_000));action=data.get('action');baseline(node)
  if action=='baseline':return {'node':node,'legacy_preserved':verify_legacy(node)}
+ if action in ('reconcile','portal') and pathlib.Path('/etc/obfuscator-control/managed').exists():
+  raise RuntimeError('3x-ui owns the client registry; use Control/ctl.py or the panel')
  if action=='reconcile':return reconcile(node,data)
+ if action=='control-enroll' and node=='de1':
+  nodes=data['nodes'];assert set(nodes)=={'de2','az1'}
+  for name,cfg in nodes.items():
+   assert cfg['node']==name and cfg['scope']=='node-sync' and cfg['basePath']=='/control-node/'
+   assert re.fullmatch(r'[A-Za-z0-9_-]{20,200}',cfg['apiToken'])
+   assert cfg['bridge_public_key'].startswith('ssh-ed25519 ')
+  atomic('/etc/obfuscator-control/enrollment.json',json.dumps(nodes)+'\n',0o600)
+  return {'stored_nodes':len(nodes)}
+ if action=='control-export':
+  info=json.loads(pathlib.Path('/etc/obfuscator-control/access.json').read_text())
+  public=pathlib.Path('/etc/obfuscator-control/tunnel/id_ed25519.pub')
+  if public.exists():info['bridge_public_key']=public.read_text().strip()
+  if node!='de1':info.pop('password',None);info.pop('username',None)
+  return info
+ if action=='control-bootstrap':
+  clients=data['clients']
+  for c in clients:
+   assert re.fullmatch(r'[a-z][a-z0-9_-]{0,47}',c['name']);uuid.UUID(c['uuid'])
+   assert re.fullmatch('[0-9a-f]{32}',c['mtp']);assert re.fullmatch(r'[A-Za-z0-9_-]{32,100}',c['token'])
+  atomic('/etc/obfuscator-control/bootstrap-clients.json',json.dumps(clients)+'\n',0o600)
+  return {'stored':len(clients)}
  if action=='configure-ddns' and node=='az1':
   token=data['publisher_token'];assert re.fullmatch(r'[A-Za-z0-9_-]{43}',token)
   atomic('/etc/obfuscator/az1-publisher.token',token+'\n',0o600)

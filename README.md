@@ -18,3 +18,7 @@ AZ1 опубликован через [релей DE1](MTP/RELAY.md) в обхо
 Актуальный слой: [Subscriptions](Subscriptions/README.md). Две публичные точки: `obfuscator.funsociety.dev` (персональная подписка DE1/AZ1) и `mtp.funsociety.dev` (MTProto DE1/AZ1 с общим адресом и отдельными секретами клиентов). DE2 скрыт и выдаётся отдельно. Старые клиенты остаются. Отдельных AI/Realtime/Payments профилей нет.
 
 [Короткие операции](Subscriptions/runbooks/operations/README.md) · [Установка и восстановление](Subscriptions/runbooks/installation/README.md). Файлы MTP/Xray описывают исходные развёртывания; изменения ingress и новые управляемые клиенты описаны в Subscriptions.
+
+## Единая панель и оркестратор
+
+[Control](Control/README.md): 3x-ui 3.11.0 на DE1 с подключёнными узлами AZ1/DE2, приватными SSH-мостами, CLI и процедурой принятия рабочих backend. Панель установлена; переключение публичного трафика и подписок пока ожидает подтверждения. Исправление SNI-релея уже работает в production: [результат 100 HTTPS-проверок](Subscriptions/snapshot/relay-acceptance-2026-10-28.json).

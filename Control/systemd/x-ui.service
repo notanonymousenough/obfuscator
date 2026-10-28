@@ -1,0 +1,18 @@
+[Unit]
+Description=Obfuscator unified 3x-ui node
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/usr/local/x-ui
+Environment=XUI_DB_FOLDER=/etc/x-ui
+Environment=XUI_BIN_FOLDER=/usr/local/x-ui/bin
+ExecStart=/usr/local/x-ui/x-ui
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+UMask=0077
+[Install]
+WantedBy=multi-user.target

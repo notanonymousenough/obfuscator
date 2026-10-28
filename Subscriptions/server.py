@@ -10,11 +10,12 @@ def response_for(data,host,path):
   return 200,{'Content-Type':'text/html; charset=utf-8'},('<!doctype html><title>Obfuscator</title><h1>Obfuscator</h1><p>'+message+'</p>').encode()
  if len(parts)!=2 or parts[0] not in ('s','mtp'):return 404,{},b'Not found\n'
  token=parts[1]
- if not re.fullmatch(r'[A-Za-z0-9_-]{32,100}',token):return 404,{},b'Not found\n'
+ if not re.fullmatch(r'[A-Za-z0-9_-]{12,100}',token):return 404,{},b'Not found\n'
  client=data.get('clients',{}).get(hashlib.sha256(token.encode()).hexdigest())
  if not client or not client.get('enabled'):return 404,{},b'Not found\n'
  if parts[0]=='mtp':
   if host!='mtp.funsociety.dev':return 404,{},b'Not found\n'
+  if not client.get('mtp'):return 404,{},b'Not found\n'
   secret='ee'+client['mtp']+'mtp.funsociety.dev'.encode().hex()
   link='tg://proxy?'+urllib.parse.urlencode({'server':'mtp.funsociety.dev','port':443,'secret':secret})
   return 302,{'Location':link},b''

@@ -1,0 +1,31 @@
+{
+  "panel_version": "3.11.0",
+  "admin_allow_ipv4": [
+    "185.146.112.151/32"
+  ],
+  "master": "de1",
+  "az1_ingress_mode": "relay",
+  "nodes": {
+    "de1": {
+      "ssh": "de1.obfuscator.funsociety.dev",
+      "vpn_domain": "de1.obfuscator.funsociety.dev",
+      "panel_forward": 1337,
+      "publish_vpn": true,
+      "mtp": true
+    },
+    "de2": {
+      "ssh": "de2.obfuscator.funsociety.dev",
+      "vpn_domain": "de2.obfuscator.funsociety.dev",
+      "panel_forward": 9412,
+      "publish_vpn": false,
+      "mtp": false
+    },
+    "az1": {
+      "ssh": "192.168.0.194",
+      "vpn_domain": "vpn-az1.obfuscator.funsociety.dev",
+      "panel_forward": 9411,
+      "publish_vpn": true,
+      "mtp": true
+    }
+  }
+}

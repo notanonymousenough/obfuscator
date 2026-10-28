@@ -1,0 +1,17 @@
+{
+  "checked_on": "2026-10-28",
+  "panel_version": "3.11.0",
+  "master": "de1",
+  "node_status": {"az1": "online", "de2": "online"},
+  "master_inbounds": 9,
+  "managed_owner_inbound_bindings": 5,
+  "clone_tests": {"vpn_https_204": ["de1", "de2", "az1"], "mtproto_hmac": ["de1", "az1"]},
+  "api_listen": "127.0.0.1:1337",
+  "public_ui": "IP allowlist and authenticated sessions",
+  "node_auth": "node-sync scoped tokens over restricted SSH reverse forwards",
+  "public_ui_denied_from_de2": true,
+  "production_backend_cutover": "pending operator confirmation",
+  "subscription_authority": "existing Subscriptions registry",
+  "local_tests_passed": {"control": 10, "subscriptions": 15, "mtp_dns": 5},
+  "phone_happ_confirmation": "pending"
+}
