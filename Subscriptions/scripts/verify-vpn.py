@@ -4,7 +4,7 @@ import argparse,base64,json,pathlib,shlex,subprocess,urllib.parse
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 def config_for(link,user):
  u=urllib.parse.urlsplit(link);q=urllib.parse.parse_qs(u.query)
- return {'log':{'loglevel':'none'},'inbounds':[{'listen':'127.0.0.1','port':0,'protocol':'socks','settings':{'auth':'noauth','udp':True}}],'outbounds':[{'protocol':'vless','settings':{'vnext':[{'address':u.hostname,'port':u.port,'users':[{'id':user,'encryption':'none'}]}]},'streamSettings':{'network':'xhttp','security':'tls','tlsSettings':{'serverName':q['sni'][0],'fingerprint':q.get('fp',['chrome'])[0],'alpn':['h2']},'xhttpSettings':{'path':q['path'][0],'mode':'stream-up'}}}]}
+ return {'log':{'loglevel':'none'},'inbounds':[{'listen':'127.0.0.1','port':0,'protocol':'socks','settings':{'auth':'noauth','udp':True}}],'outbounds':[{'protocol':'vless','settings':{'vnext':[{'address':u.hostname,'port':u.port,'users':[{'id':user,'encryption':'none'}]}]},'streamSettings':{'network':'xhttp','security':'tls','tlsSettings':{'serverName':q['sni'][0],'fingerprint':q.get('fp',['chrome'])[0],'alpn':['h2']},'xhttpSettings':{'path':q['path'][0],'mode':q.get('mode',['stream-up'])[0]}}}]}
 def main():
  p=argparse.ArgumentParser();p.add_argument('client',nargs='?',default='owner');p.add_argument('--rejected',action='store_true');p.add_argument('--nodes',nargs='+',choices=['de1','de2','az1'],default=['de1','de2','az1']);p.add_argument('--from-node',choices=['az1','de2'],default='az1');p.add_argument('--attempts',type=int,default=1);p.add_argument('--timeout',type=int,default=7);a=p.parse_args()
  if not 1<=a.attempts<=100 or not 1<=a.timeout<=30:p.error('attempts 1..100; timeout 1..30')
@@ -40,6 +40,5 @@ print('SUMMARY checks='+str(total)+' failures='+str(failures),flush=True)
 raise SystemExit(1 if failures else 0)
 '''.replace('PAYLOAD',repr(base64.b64encode(json.dumps(payload).encode()).decode()))
  host={'az1':'192.168.0.194','de2':'de2.obfuscator.funsociety.dev'}[a.from_node]
- inner=shlex.join(['ssh','-o','BatchMode=yes','-p','2222','deploy@'+host,'python3 -c '+shlex.quote(remote)])
- return subprocess.run(['ssh','-o','BatchMode=yes','user@192.168.0.192',inner]).returncode
+ return subprocess.run(['ssh','-o','BatchMode=yes','-p','2222','deploy@'+host,'python3 -c '+shlex.quote(remote)]).returncode
 if __name__=='__main__':raise SystemExit(main())

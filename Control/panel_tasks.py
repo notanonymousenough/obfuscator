@@ -20,7 +20,7 @@ def add_vpn():
   if m:c['secret']='ee'+m['mtp']+'mtp.funsociety.dev'.encode().hex()
   clients.append(c)
  settings=copy.deepcopy(original['settings']);settings['clients']=clients
- inbound={'tag':tag,'remark':node.upper()+' · VLESS/XHTTP'+(' · private' if node=='de2' else ''),'listen':'127.0.0.1','port':8545,'protocol':'vless','settings':json.dumps(settings),'streamSettings':json.dumps(original['streamSettings']),'sniffing':json.dumps({'enabled':False}),'enable':True,'excludeFromSub':node=='de2','shareAddrStrategy':'custom','shareAddr':{'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'vpn-az1.obfuscator.funsociety.dev'}[node]}
+ inbound={'tag':tag,'remark':node.upper()+' · VLESS/XHTTP'+(' · private' if node=='de2' else ''),'listen':'127.0.0.1','port':8545,'protocol':'vless','settings':json.dumps(settings),'streamSettings':json.dumps(original['streamSettings']),'sniffing':json.dumps({'enabled':False}),'enable':True,'excludeFromSub':node=='de2','shareAddrStrategy':'custom','shareAddr':{'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'az1.funsociety.dev'}[node]}
  api.call('inbounds/add',inbound);api.call('server/restartXrayService',{})
  print(node,'VPN cloned into panel; legacy listener preserved')
 def add_mtp():

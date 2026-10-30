@@ -49,8 +49,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
    reachable=False
    try:
     with socket.create_connection((ip,443),timeout=4) as s:
-     with ssl.create_default_context().wrap_socket(s,server_hostname='vpn-az1.obfuscator.funsociety.dev') as t:
-      t.settimeout(4);t.sendall(b'GET /.well-known/obfuscator-node HTTP/1.1\r\nHost: vpn-az1.obfuscator.funsociety.dev\r\nConnection: close\r\n\r\n');buf=b''
+     with ssl.create_default_context().wrap_socket(s,server_hostname='az1.obfuscator.funsociety.dev') as t:
+      t.settimeout(4);t.sendall(b'GET /.well-known/obfuscator-node HTTP/1.1\r\nHost: az1.obfuscator.funsociety.dev\r\nConnection: close\r\n\r\n');buf=b''
       while len(buf)<8192:
        block=t.recv(4096)
        if not block:break

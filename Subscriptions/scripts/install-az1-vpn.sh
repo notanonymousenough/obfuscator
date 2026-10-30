@@ -2,7 +2,7 @@
 set -euo pipefail
 cd /home/deploy/obfuscator-subscriptions
 python3 scripts/import-cloudflare.py /home/deploy/cloudflare.ini
-certbot certonly --non-interactive --agree-tos --register-unsafely-without-email --dns-cloudflare --dns-cloudflare-credentials /etc/obfuscator/cloudflare.ini --dns-cloudflare-propagation-seconds 90 --cert-name obfuscator-az1-vpn -d vpn-az1.obfuscator.funsociety.dev -d mtp.funsociety.dev
+certbot certonly --non-interactive --agree-tos --register-unsafely-without-email --dns-cloudflare --dns-cloudflare-credentials /etc/obfuscator/cloudflare.ini --dns-cloudflare-propagation-seconds 90 --cert-name obfuscator-az1-vpn -d az1.obfuscator.funsociety.dev -d mtp.funsociety.dev
 printf '%s\n' '4d30283ae614e3057f730f67cd088a42be6fdf91f8639d82cb69e48cde80413c  assets/Xray-linux-arm64-v8a.zip' | sha256sum -c -
 python3 - <<'PY'
 import zipfile,pathlib,os

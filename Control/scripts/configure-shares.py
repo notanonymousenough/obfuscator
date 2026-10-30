@@ -10,7 +10,7 @@ for b in api.inbounds():
  tag=b['tag']
  if not tag.startswith(('obf-vpn-','obf-mtp-')):continue
  node=tag.rsplit('-',1)[-1];mtp=tag.startswith('obf-mtp-')
- domain='mtp.funsociety.dev' if mtp else {'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'vpn-az1.obfuscator.funsociety.dev'}[node]
+ domain='mtp.funsociety.dev' if mtp else {'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'az1.funsociety.dev'}[node]
  settings=b['streamSettings'];settings=json.loads(settings) if isinstance(settings,str) else settings
  group={'inboundIds':[b['id']],'hosts':[domain],'remark':'Obfuscator '+tag,'port':443,'security':'same' if mtp else 'tls','sni':domain,'alpn':[] if mtp else ['h2'],'fingerprint':'' if mtp else 'chrome','path':'' if mtp else settings['xhttpSettings']['path']}
  old=next((h for h in hosts if h.get('remark')==group['remark']),None)

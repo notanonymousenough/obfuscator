@@ -15,14 +15,14 @@ class DDNSIngress(unittest.TestCase):
    if unavailable:
     self.assertEqual(calls,[]);return
    self.assertEqual({c.args[0]['name'] for c in calls},set(m.NAMES))
-   self.assertEqual(len(calls),2)
+   self.assertEqual(len(calls),1)
    for c in calls:self.assertEqual(c.args[0]['ipv4'],'185.146.112.151' if reachable and not unavailable else '159.89.12.205')
- def test_reachable_publishes_both_direct_names(self):self.run_case(True)
- def test_unreachable_keeps_both_relay_names(self):self.run_case(False)
+ def test_reachable_publishes_direct_name(self):self.run_case(True)
+ def test_unreachable_keeps_relay_name(self):self.run_case(False)
  def test_probe_error_preserves_current_dns(self):self.run_case(True,True)
 
  def test_forced_relay_skips_discovery_and_external_probe(self):
   with tempfile.TemporaryDirectory() as td:
    cfg=pathlib.Path(td)/'config';cfg.write_text(json.dumps({'ingress_mode':'relay','relay_ipv4':'159.89.12.205'}))
    with patch.object(m,'CONFIG',cfg),patch.object(m,'public_ipv4') as discover,patch.object(m.urllib.request,'urlopen') as probe,patch.object(m,'sync') as sync,contextlib.redirect_stdout(io.StringIO()):m.main()
-   discover.assert_not_called();probe.assert_not_called();self.assertEqual(sync.call_count,2)
+   discover.assert_not_called();probe.assert_not_called();self.assertEqual(sync.call_count,1)

@@ -2,9 +2,9 @@
 """Read the normalized 3x-ui registry and publish filtered subscription delivery atomically."""
 import argparse,hashlib,json,os,pathlib,re,sqlite3,tempfile,time,urllib.parse
 DB=pathlib.Path('/etc/x-ui/x-ui.db');DATA=pathlib.Path('/var/lib/obfuscator-subscriptions/data.json')
-DOMAINS={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'vpn-az1.obfuscator.funsociety.dev'}
+DOMAINS={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'az1.funsociety.dev'}
 def make_link(node,user,stream):
- q=urllib.parse.urlencode({'encryption':'none','security':'tls','sni':DOMAINS[node],'alpn':'h2','fp':'chrome','type':'xhttp','path':stream['xhttpSettings']['path'],'mode':'stream-up'})
+ q=urllib.parse.urlencode({'encryption':'none','security':'tls','sni':DOMAINS[node],'alpn':'h2','fp':'chrome','type':'xhttp','path':stream['xhttpSettings']['path'],'mode':'packet-up' if node=='az1' else 'stream-up'})
  return 'vless://'+user+'@'+DOMAINS[node]+':443?'+q+'#'+node.upper()
 def collect(con,now_ms=None):
  now_ms=now_ms or int(time.time()*1000);con.row_factory=sqlite3.Row;out={};mtp_nodes={}

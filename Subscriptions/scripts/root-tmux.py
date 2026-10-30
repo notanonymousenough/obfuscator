@@ -17,5 +17,4 @@ for _ in range(1200):
 else:raise RuntimeError('Timed out; inspect tmux before retry')
 print((d/'log').read_text());raise SystemExit(int((d/'status').read_text()))
 '''.replace('SCRIPT',repr(script))
-inner=shlex.join(['ssh','-o','BatchMode=yes','-p','2222','deploy@'+host,'python3 -c '+shlex.quote(remote)])
-r=subprocess.run(['ssh','-o','BatchMode=yes','user@192.168.0.192',inner]);sys.exit(r.returncode)
+r=subprocess.run(['ssh','-o','BatchMode=yes','-o','ConnectTimeout=10','-p','2222','deploy@'+host,'python3 -c '+shlex.quote(remote)]);sys.exit(r.returncode)

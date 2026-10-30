@@ -1,5 +1,13 @@
 # Obfuscator
 
+> Обновление 30.10.2026: XHTTP AZ1 опубликован через бесплатный Cloudflare Tunnel
+> на `az1.funsociety.dev:443` (клиентский mode `packet-up`).
+> Это тестовый вход: короткие запросы быстрее DE1 relay, но длительная передача
+> оборвалась примерно через 104 с; приёмка стабильности не пройдена.
+> Используемый MTProto `mtp.funsociety.dev:8888` остаётся на DE1 под управлением x-ui;
+> MTProto на AZ1 отложен. Старые описания DE1 relay ниже относятся к предыдущему входу.
+> [Настройка и проверки Tunnel](Subscriptions/runbooks/operations/az1-cloudflare-tunnel.md).
+
 Исходные схемы проекта (актуальный слой подписок описан ниже):
 
 - [MTP](MTP/README.md): самостоятельный MTProto FakeTLS на AZ1 без x-ui; пакеты, установка, systemd, SSH2222, DNS-01 сертификат и DDNS. [Фактическое состояние AZ1](MTP/DEPLOYMENT.md).

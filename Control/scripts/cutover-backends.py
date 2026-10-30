@@ -9,7 +9,7 @@ P=pathlib.Path;base=P('/home/deploy/obfuscator-control');Panel=SourceFileLoader(
 node={'obfuscator-de1':'de1','obfuscator-de2':'de2','obfuscator-az1':'az1'}[os.uname().nodename.split('.')[0]]
 api=Panel(json.loads(P('/etc/obfuscator-control/access.json').read_text()))
 old_service='obfuscator-vpn' if node=='az1' else 'xray-docker'
-domain={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'vpn-az1.obfuscator.funsociety.dev'}[node]
+domain={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'az1.funsociety.dev'}[node]
 backup=P('/var/lib/obfuscator-control/backups/cutover');backup.mkdir(mode=0o700,parents=True,exist_ok=True);statefile=backup/'state.json'
 def active(unit):return subprocess.run(['systemctl','is-active','--quiet',unit]).returncode==0
 def enabled(unit):return subprocess.run(['systemctl','is-enabled','--quiet',unit],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0

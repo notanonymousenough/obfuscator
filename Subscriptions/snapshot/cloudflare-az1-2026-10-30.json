@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-30",
+  "hostname": "az1.funsociety.dev",
+  "mode": "packet-up",
+  "cold_tests": [
+    {
+      "source": "az1",
+      "results": [
+        {
+          "route": "cloudflare",
+          "checks": 10,
+          "failures": 0,
+          "median_ms": 597,
+          "max_ms": 725
+        },
+        {
+          "route": "de1-relay",
+          "checks": 10,
+          "failures": 2,
+          "median_ms": 1098,
+          "max_ms": 1228
+        }
+      ]
+    },
+    {
+      "source": "de2",
+      "results": [
+        {
+          "route": "cloudflare",
+          "checks": 10,
+          "failures": 0,
+          "median_ms": 615,
+          "max_ms": 718
+        },
+        {
+          "route": "de1-relay",
+          "checks": 10,
+          "failures": 1,
+          "median_ms": 738,
+          "max_ms": 804
+        }
+      ]
+    },
+    {
+      "source": "de2",
+      "results": [
+        {
+          "route": "cloudflare",
+          "checks": 50,
+          "failures": 1,
+          "median_ms": 493,
+          "max_ms": 1505
+        }
+      ]
+    }
+  ],
+  "long_transfer": {
+    "source": "de2",
+    "exit": 92,
+    "result": "200 10649600 104.449500"
+  },
+  "post_transfer": {
+    "checks": 30,
+    "failures": 3
+  },
+  "az1_additional_https_checks": {
+    "checks": 20,
+    "failures": 0
+  },
+  "limitations": [
+    "Short pilot only; no phone/Russian mobile network test",
+    "Long transfer failed after 104.45 seconds; not accepted as stable",
+    "stream-up failed including noGRPCHeader trial; packet-up retained"
+  ],
+  "restart_recovery": {
+    "checks": 10,
+    "failures": 0
+  }
+}

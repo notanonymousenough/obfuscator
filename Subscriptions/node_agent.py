@@ -102,8 +102,8 @@ def reconcile(node,payload):
    atomic(path,prior);run(['systemctl','restart','obfuscator-vpn' if node=='az1' else 'xray-docker']);raise
  atomic(previous,json.dumps(clients,indent=2)+'\n',0o600)
  telemt(clients,node)
- stream=inbound['streamSettings'];domain={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'vpn-az1.obfuscator.funsociety.dev'}[node]
- q=urllib.parse.urlencode({'encryption':'none','security':'tls','sni':domain,'alpn':'h2','fp':'chrome','type':'xhttp','path':stream['xhttpSettings']['path'],'mode':'stream-up'})
+ stream=inbound['streamSettings'];domain={'de1':'de1.obfuscator.funsociety.dev','de2':'de2.obfuscator.funsociety.dev','az1':'az1.funsociety.dev'}[node]
+ q=urllib.parse.urlencode({'encryption':'none','security':'tls','sni':domain,'alpn':'h2','fp':'chrome','type':'xhttp','path':stream['xhttpSettings']['path'],'mode':'packet-up' if node=='az1' else 'stream-up'})
  links={c['name']:'vless://'+c['uuid']+'@'+domain+':443?'+q+'#'+node.upper() for c in clients}
  return {'node':node,'links':links,'legacy_preserved':verify_legacy(node),'managed_count':len(clients)}
 def main():

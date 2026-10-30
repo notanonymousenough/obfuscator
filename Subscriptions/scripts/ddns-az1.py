@@ -2,7 +2,7 @@
 """Publish direct AZ1 only after an external TLS identity probe; retain DE1 fallback."""
 import json,pathlib,urllib.request
 from cloudflare_dns import public_ipv4,sync
-NAMES=('az1.obfuscator.funsociety.dev','vpn-az1.obfuscator.funsociety.dev')
+NAMES=('az1.obfuscator.funsociety.dev',)
 CONFIG=pathlib.Path('/etc/obfuscator/az1-ddns.json')
 def main():
  cfg=json.loads(CONFIG.read_text());mode=cfg.get('ingress_mode','auto');reachable=False;ip=None
